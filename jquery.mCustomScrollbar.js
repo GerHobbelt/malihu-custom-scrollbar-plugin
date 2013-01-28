@@ -781,6 +781,13 @@ plugin home: http://manos.malihu.gr/jquery-custom-content-scroller
 			var $this=$(this),
 				mCustomScrollBox=$this.find(".mCustomScrollBox"),
 				mCSB_container=$this.find(".mCSB_container");
+
+			if ($.isEmptyObject($this.data())) {
+				// the element was removed in the meantime (i.e. before the callback was fired)
+				// (jQuery.remove() method empties data hash)
+				return;
+			}
+
 			switch(callback){
 				/*start scrolling callback*/
 				case "onScrollStart":
