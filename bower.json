@@ -1,0 +1,8 @@
+{
+  "name": "malihu-custom-scrollbar-plugin-bower",
+  "version": "2.8",
+  "main": [
+    "./js/uncrompressed/jquery.mCustomScrollbar.js",
+    "./js/uncrompressed/jquery.mousewheel.js",
+  ]
+}
