@@ -1,6 +1,6 @@
 /* 
 == malihu jquery custom scrollbars plugin == 
-version: 2.3.2 
+version: 2.3.3 
 author: malihu (http://manos.malihu.gr) 
 plugin home: http://manos.malihu.gr/jquery-custom-content-scroller 
 */
@@ -348,7 +348,8 @@ plugin home: http://manos.malihu.gr/jquery-custom-content-scroller
 					}
 				}
 				if(!$this.data("bindEvent_mousewheel")){ /*bind once*/
-					mCustomScrollBox.bind("mousewheel",function(event,delta){
+          mCustomScrollBox.bind("mousewheel",function(event, delta, deltaX, deltaY) {
+						if (!$this.data('horizontalScroll') && deltaY == 0) return;
 						event.preventDefault();
 						var vel=Math.abs(delta*mousewheelVel);
 						if($this.data("horizontalScroll")){
