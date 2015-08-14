@@ -2127,7 +2127,7 @@ and dependencies (minified).
 					content:mCSB_container, /* original content wrapper as jquery object */
 					top:cp[0],left:cp[1],draggerTop:dp[0],draggerLeft:dp[1],
 					topPct:Math.round((100*Math.abs(cp[0]))/(Math.abs(cl[0])-pl[0])),leftPct:Math.round((100*Math.abs(cp[1]))/(Math.abs(cl[1])-pl[1])),
-					direction:options.dir
+					direction:options.dir,
 					delta:options.delta
 				};
 				/* 
