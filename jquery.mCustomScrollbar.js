@@ -1472,7 +1472,7 @@ and dependencies (minified).
 					e.stopImmediatePropagation();
 					e.preventDefault();
 				}
-				_scrollTo($this,(contentPos-(dlt*amount)).toString(),{dir:dir, delta: dlt});
+				_scrollTo($this,(contentPos-(dlt*amount)).toString(),{dir:dir}, dlt);
 			}
 		},
 		/* -------------------- */
@@ -1976,11 +1976,7 @@ and dependencies (minified).
 		ANIMATES CONTENT 
 		This is where the actual scrolling happens
 		*/
-		_scrollTo=function(el,to,options){
-			var delta;
-			if(options.hasOwnProperty('delta')) {
-				delta = options.delta;
-			}
+		_scrollTo=function(el,to,options, delta){
 			var d=el.data(pluginPfx),o=d.opt,
 				defaults={
 					trigger:"internal",
@@ -2070,6 +2066,7 @@ and dependencies (minified).
 				_mcs(delta);  /* init mcs object (once) to make it available before callbacks */
 				if(_cb("onInit")){o.callbacks.onInit.call(el[0]);} /* callbacks: onInit */
 			}
+
 			clearTimeout(mCSB_container[0].onCompleteTimeout);
 			if(!d.tweenRunning && ((contentPos===0 && scrollTo[0]>=0) || (contentPos===limit[0] && scrollTo[0]<=limit[0]))){return;}
 			_tweenTo(mCSB_dragger[0],property,Math.round(scrollTo[1]),dur[1],options.scrollEasing);
@@ -2077,7 +2074,7 @@ and dependencies (minified).
 				onStart:function(){
 					if(options.callbacks && options.onStart && !d.tweenRunning){
 						/* callbacks: onScrollStart */
-						if(_cb("onScrollStart")){_mcs(); o.callbacks.onScrollStart.call(el[0]);}
+						if(_cb("onScrollStart")){_mcs(delta); o.callbacks.onScrollStart.call(el[0]);}
 						d.tweenRunning=true;
 						_onDragClasses(mCSB_dragger);
 						d.cbOffsets=_cbOffsets();
@@ -2085,7 +2082,7 @@ and dependencies (minified).
 				},onUpdate:function(){
 					if(options.callbacks && options.onUpdate){
 						/* callbacks: whileScrolling */
-						if(_cb("whileScrolling")){_mcs(); o.callbacks.whileScrolling.call(el[0]);}
+						if(_cb("whileScrolling")){_mcs(delta); o.callbacks.whileScrolling.call(el[0]);}
 					}
 				},onComplete:function(){
 					if(options.callbacks && options.onComplete){
@@ -2093,9 +2090,9 @@ and dependencies (minified).
 						var t=mCSB_container[0].idleTimer || 0;
 						mCSB_container[0].onCompleteTimeout=setTimeout(function(){
 							/* callbacks: onScroll, onTotalScroll, onTotalScrollBack */
-							if(_cb("onScroll")){_mcs(); o.callbacks.onScroll.call(el[0]);}
-							if(_cb("onTotalScroll") && scrollTo[1]>=limit[1]-totalScrollOffset && d.cbOffsets[0]){_mcs(); o.callbacks.onTotalScroll.call(el[0]);}
-							if(_cb("onTotalScrollBack") && scrollTo[1]<=totalScrollBackOffset && d.cbOffsets[1]){_mcs(); o.callbacks.onTotalScrollBack.call(el[0]);}
+							if(_cb("onScroll")){_mcs(delta); o.callbacks.onScroll.call(el[0]);}
+							if(_cb("onTotalScroll") && scrollTo[1]>=limit[1]-totalScrollOffset && d.cbOffsets[0]){_mcs(delta); o.callbacks.onTotalScroll.call(el[0]);}
+							if(_cb("onTotalScrollBack") && scrollTo[1]<=totalScrollBackOffset && d.cbOffsets[1]){_mcs(delta); o.callbacks.onTotalScrollBack.call(el[0]);}
 							d.tweenRunning=false;
 							mCSB_container[0].idleTimer=0;
 							_onDragClasses(mCSB_dragger,"hide");
@@ -2133,7 +2130,7 @@ and dependencies (minified).
 					top:cp[0],left:cp[1],draggerTop:dp[0],draggerLeft:dp[1],
 					topPct:Math.round((100*Math.abs(cp[0]))/(Math.abs(cl[0])-pl[0])),leftPct:Math.round((100*Math.abs(cp[1]))/(Math.abs(cl[1])-pl[1])),
 					direction:options.dir,
-					delta: delta
+				    delta: delta
 				};
 				/* 
 				this refers to the original element containing the scrollbar(s)
