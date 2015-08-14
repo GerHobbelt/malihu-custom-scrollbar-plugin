@@ -1472,7 +1472,7 @@ and dependencies (minified).
 					e.stopImmediatePropagation();
 					e.preventDefault();
 				}
-				_scrollTo($this,(contentPos-(dlt*amount)).toString(),{dir:dir}, delta: dlt);
+				_scrollTo($this,(contentPos-(dlt*amount)).toString(),{dir:dir}, delta);
 			}
 		},
 		/* -------------------- */
@@ -1976,8 +1976,9 @@ and dependencies (minified).
 		ANIMATES CONTENT 
 		This is where the actual scrolling happens
 		*/
-		_scrollTo=function(el,to,options, delta){
+		_scrollTo=function(el,to,options){
 			var d=el.data(pluginPfx),o=d.opt,
+				delta = options.delta || null,
 				defaults={
 					trigger:"internal",
 					dir:"y",
