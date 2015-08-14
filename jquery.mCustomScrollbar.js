@@ -1977,6 +1977,9 @@ and dependencies (minified).
 		This is where the actual scrolling happens
 		*/
 		_scrollTo=function(el,to,options){
+			
+				console.warn(options);
+			var delta = options.delta;
 			var d=el.data(pluginPfx),o=d.opt,
 				defaults={
 					trigger:"internal",
@@ -1997,8 +2000,6 @@ and dependencies (minified).
 				wrapper=mCSB_container.parent(),
 				totalScrollOffsets=o.callbacks.onTotalScrollOffset ? _arr.call(el,o.callbacks.onTotalScrollOffset) : [0,0],
 				totalScrollBackOffsets=o.callbacks.onTotalScrollBackOffset ? _arr.call(el,o.callbacks.onTotalScrollBackOffset) : [0,0];
-
-				console.warn(options);
 
 			d.trigger=options.trigger;
 			if(wrapper.scrollTop()!==0 || wrapper.scrollLeft()!==0){ /* always reset scrollTop/Left */
