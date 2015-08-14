@@ -1472,7 +1472,7 @@ and dependencies (minified).
 					e.stopImmediatePropagation();
 					e.preventDefault();
 				}
-				_scrollTo($this,(contentPos-(dlt*amount)).toString(),{dir:dir, delta: dlt});
+				_scrollTo($this,(contentPos-(dlt*amount)).toString(),{dir:dir}, delta: dlt);
 			}
 		},
 		/* -------------------- */
@@ -1976,7 +1976,7 @@ and dependencies (minified).
 		ANIMATES CONTENT 
 		This is where the actual scrolling happens
 		*/
-		_scrollTo=function(el,to,options){
+		_scrollTo=function(el,to,options, delta){
 			var d=el.data(pluginPfx),o=d.opt,
 				defaults={
 					trigger:"internal",
@@ -2062,7 +2062,7 @@ and dependencies (minified).
 				scrollTo[0]=-scrollTo[0];
 			}
 			if(!el[0].mcs){
-				_mcs();  /* init mcs object (once) to make it available before callbacks */
+				_mcs(delta);  /* init mcs object (once) to make it available before callbacks */
 				if(_cb("onInit")){o.callbacks.onInit.call(el[0]);} /* callbacks: onInit */
 			}
 			clearTimeout(mCSB_container[0].onCompleteTimeout);
@@ -2118,7 +2118,7 @@ and dependencies (minified).
 				scrolling x percentage: this.mcs.leftPct 
 				scrolling direction: this.mcs.direction
 			*/
-			function _mcs(){
+			function _mcs(delta){
 				var cp=[mCSB_container[0].offsetTop,mCSB_container[0].offsetLeft], /* content position */
 					dp=[mCSB_dragger[0].offsetTop,mCSB_dragger[0].offsetLeft], /* dragger position */
 					cl=[mCSB_container.outerHeight(false),mCSB_container.outerWidth(false)], /* content length */
@@ -2128,7 +2128,7 @@ and dependencies (minified).
 					top:cp[0],left:cp[1],draggerTop:dp[0],draggerLeft:dp[1],
 					topPct:Math.round((100*Math.abs(cp[0]))/(Math.abs(cl[0])-pl[0])),leftPct:Math.round((100*Math.abs(cp[1]))/(Math.abs(cl[1])-pl[1])),
 					direction:options.dir
-					delta:options.delta
+					delta: delta
 				};
 				/* 
 				this refers to the original element containing the scrollbar(s)

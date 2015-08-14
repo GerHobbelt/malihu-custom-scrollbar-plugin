@@ -1,5 +1,5 @@
 {
-  "name": "malihu-custom-scrollbar-plugin",
+  "name": "malihu-custom-scrollbar-plugin-kgt-fork",
   "title": "malihu custom scrollbar plugin",
   "description": "Highly customizable custom scrollbar jQuery plugin, featuring vertical/horizontal scrollbars, scrolling momentum, mouse-wheel, keyboard and touch support, user defined callbacks etc.",
   "main": [
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/malihu/malihu-custom-scrollbar-plugin.git"
+    "url": "git://github.com/diamond-darrell/malihu-custom-scrollbar-plugin.git"
   },
   "licenses": [
     {
