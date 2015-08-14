@@ -1472,7 +1472,7 @@ and dependencies (minified).
 					e.stopImmediatePropagation();
 					e.preventDefault();
 				}
-				_scrollTo($this,(contentPos-(dlt*amount)).toString(),{dir:dir});
+				_scrollTo($this,(contentPos-(dlt*amount)).toString(),{dir:dir, delta: dlt});
 			}
 		},
 		/* -------------------- */
@@ -2128,6 +2128,7 @@ and dependencies (minified).
 					top:cp[0],left:cp[1],draggerTop:dp[0],draggerLeft:dp[1],
 					topPct:Math.round((100*Math.abs(cp[0]))/(Math.abs(cl[0])-pl[0])),leftPct:Math.round((100*Math.abs(cp[1]))/(Math.abs(cl[1])-pl[1])),
 					direction:options.dir
+					delta:options.delta
 				};
 				/* 
 				this refers to the original element containing the scrollbar(s)
