@@ -1977,9 +1977,10 @@ and dependencies (minified).
 		This is where the actual scrolling happens
 		*/
 		_scrollTo=function(el,to,options){
-			
-				console.warn(options);
-			var delta = options.delta;
+			var delta;
+			if(options.hasOwnProperty('delta')) {
+				delta = options.delta;
+			}
 			var d=el.data(pluginPfx),o=d.opt,
 				defaults={
 					trigger:"internal",
