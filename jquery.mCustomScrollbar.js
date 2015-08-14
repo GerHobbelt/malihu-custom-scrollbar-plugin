@@ -1472,7 +1472,7 @@ and dependencies (minified).
 					e.stopImmediatePropagation();
 					e.preventDefault();
 				}
-				_scrollTo($this,(contentPos-(dlt*amount)).toString(),{dir:dir, delta: delta});
+				_scrollTo($this,(contentPos-(dlt*amount)).toString(),{dir:dir, delta: dlt});
 			}
 		},
 		/* -------------------- */
@@ -1997,8 +1997,8 @@ and dependencies (minified).
 				wrapper=mCSB_container.parent(),
 				totalScrollOffsets=o.callbacks.onTotalScrollOffset ? _arr.call(el,o.callbacks.onTotalScrollOffset) : [0,0],
 				totalScrollBackOffsets=o.callbacks.onTotalScrollBackOffset ? _arr.call(el,o.callbacks.onTotalScrollBackOffset) : [0,0];
-				
-			var delta = options.delta || null;
+
+				console.warn(options);
 
 			d.trigger=options.trigger;
 			if(wrapper.scrollTop()!==0 || wrapper.scrollLeft()!==0){ /* always reset scrollTop/Left */
